@@ -1,161 +1,156 @@
-# JetFlux SDK
+# Stratos Investment Assistant
 
-A Claude Code development environment using **everything-claude-code (ECC)** for structured development workflows.
+A conservative long-term investment assistant that helps users identify stable stocks suitable for a 10+ year investment horizon.
 
 ## Features
 
-- **18 Specialized Agents** - 9 core + 9 enhanced agents
-- **18 Slash Commands** - Quick access to development workflows
-- **6-Phase Development Workflow** - Structured approach from planning to deployment
+- **Stock Screener** - Filter stocks by dividend yield, P/E ratio, market cap, beta, and debt/equity
+- **AI-Powered Analysis** - Get buy/hold/sell recommendations with confidence scores
+- **Portfolio Tracking** - Track holdings with real-time values and gain/loss calculations
+- **Price Alerts** - Set alerts for when stocks hit your target prices
+- **Conservative Focus** - Curated universe of 33 blue-chip dividend-paying stocks
+
+## Tech Stack
+
+| Layer | Technology |
+|-------|------------|
+| Frontend | Next.js 15, React 19, TypeScript, Tailwind CSS |
+| Backend | FastAPI, Python 3.11, SQLAlchemy |
+| Database | SQLite (dev), PostgreSQL (prod) |
+| Data Source | yfinance (Yahoo Finance API) |
 
 ## Quick Start
 
-### 1. Install Plugin (if not installed)
+### Backend
+
 ```bash
-/plugin marketplace add affaan-m/everything-claude-code
-/plugin install everything-claude-code
-/plugin list  # verify installation
+cd backend
+python -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+pip install -r requirements.txt
+uvicorn api.main:app --reload
 ```
 
-### 2. Project Initialization
-On first session, Claude prompts for project settings (scope, product type, objective). These are saved to `instructions.md`.
+API available at http://localhost:8000
+API docs at http://localhost:8000/docs
 
-### 3. Running Commands
-```
-instructions.md (context) + /plan (command) → context-aware planning
-```
+### Frontend
 
-## Slash Commands (18 total)
-
-| Category | Commands |
-|----------|----------|
-| **Core** | `/tdd`, `/plan`, `/code-review`, `/e2e`, `/build-fix`, `/refactor-clean` |
-| **Quality** | `/verify`, `/checkpoint`, `/test-coverage`, `/no-stubs`, `/real-testing` |
-| **Operations** | `/deploy`, `/setup-pm` |
-| **Documentation** | `/update-docs`, `/update-codemaps`, `/learn` |
-| **Advanced** | `/eval`, `/orchestrate` |
-
-## Complete Development Workflow
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│  PHASE 0: ORCHESTRATION (for complex tasks only)            │
-├─────────────────────────────────────────────────────────────┤
-│  /orchestrate  → Use when task touches 3+ areas or needs    │
-│                  multiple agents working together           │
-│                  Example: "Add authentication" (frontend,   │
-│                  backend, database, tests all at once)      │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│  PHASE 1: SETUP & PLANNING                                  │
-├─────────────────────────────────────────────────────────────┤
-│  /setup-pm        → Configure package manager (npm/pip)     │
-│  /plan            → Design implementation approach          │
-│  /update-codemaps → Document initial structure              │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│  PHASE 2: IMPLEMENTATION (repeat for each feature)          │
-├─────────────────────────────────────────────────────────────┤
-│  /tdd             → Write tests FIRST, then implement       │
-│  /no-stubs        → Verify no placeholder content           │
-│  /checkpoint      → Save progress after milestone           │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│  PHASE 3: TESTING & QUALITY                                 │
-├─────────────────────────────────────────────────────────────┤
-│  /e2e             → Generate end-to-end tests               │
-│  /real-testing    → Verify tests use real services          │
-│  /test-coverage   → Check coverage gaps                     │
-│  /eval            → Test AI features (if applicable)        │
-│  /verify          → Run full validation                     │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│  PHASE 4: REVIEW & CLEANUP                                  │
-├─────────────────────────────────────────────────────────────┤
-│  /code-review     → Quality and security review             │
-│  /refactor-clean  → Remove dead code                        │
-│  /build-fix       → Fix any build errors                    │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│  PHASE 5: DOCUMENTATION                                     │
-├─────────────────────────────────────────────────────────────┤
-│  /update-docs     → Sync documentation with code            │
-│  /update-codemaps → Update architecture diagrams            │
-│  /learn           → Extract patterns from session           │
-└─────────────────────────────────────────────────────────────┘
-                            ↓
-┌─────────────────────────────────────────────────────────────┐
-│  PHASE 6: DEPLOYMENT                                        │
-├─────────────────────────────────────────────────────────────┤
-│  /deploy          → Docker/Kubernetes setup                 │
-│  /verify          → Final validation                        │
-└─────────────────────────────────────────────────────────────┘
+```bash
+cd frontend
+npm install
+npm run dev
 ```
 
-## Quick Reference by Situation
+App available at http://localhost:3000
 
-| When | Use |
-|------|-----|
-| Starting a project | `/setup-pm` → `/plan` |
-| Adding a feature | `/plan` → `/tdd` → `/no-stubs` → `/checkpoint` |
-| Complex cross-cutting work | `/orchestrate` (coordinates multiple phases) |
-| Build broken | `/build-fix` |
-| Before committing | `/code-review` → `/verify` |
-| After major changes | `/update-codemaps` → `/update-docs` |
-| Testing AI features | `/eval` |
-| Cleaning up | `/refactor-clean` |
-| Deploying | `/deploy` |
+## API Endpoints
 
-## Minimum Viable Workflow
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/v1/stocks/screen` | Screen stocks with filters |
+| `GET /api/v1/stocks/{symbol}` | Get stock details |
+| `GET /api/v1/analysis/quick/{symbol}` | Get AI analysis |
+| `GET /api/v1/portfolio/` | Get portfolio with values |
+| `POST /api/v1/portfolio/holdings` | Add portfolio holding |
+| `GET /api/v1/alerts/` | Get price alerts |
+| `POST /api/v1/alerts/` | Create price alert |
+| `GET /api/v1/alerts/check/all` | Check all alerts |
 
-For quick tasks:
+## Conservative Stock Universe
+
+33 blue-chip stocks across sectors:
+
+| Sector | Stocks |
+|--------|--------|
+| Healthcare | JNJ, PFE, ABBV, MRK, UNH |
+| Consumer Staples | PG, KO, PEP, WMT, COST |
+| Financials | JPM, BRK-B, V, MA, BAC |
+| Technology | MSFT, AAPL, CSCO, IBM, INTC |
+| Utilities | NEE, DUK, SO, D, AEP |
+| Industrials | MMM, HON, CAT, UPS, RTX |
+| Energy | XOM, CVX, COP |
+| REITs | O, SPG, AMT |
+
+## Default Screening Criteria
+
+| Metric | Target |
+|--------|--------|
+| Dividend Yield | > 2% |
+| P/E Ratio | < 25 |
+| Market Cap | > $10B |
+| Beta | < 1.0 |
+| Debt/Equity | < 0.5 |
+
+## Project Structure
+
 ```
-/plan → /tdd → /verify → /code-review
+stratos-investment-assistant/
+├── backend/
+│   ├── api/
+│   │   ├── routes/
+│   │   │   ├── stocks.py      # Stock screening
+│   │   │   ├── analysis.py    # AI recommendations
+│   │   │   ├── portfolio.py   # Portfolio tracking
+│   │   │   ├── alerts.py      # Price alerts
+│   │   │   └── preferences.py # User preferences
+│   │   └── main.py
+│   ├── models/
+│   │   ├── database.py        # SQLAlchemy setup
+│   │   └── preferences.py     # Data models
+│   ├── services/
+│   │   ├── stock_service.py   # yfinance integration
+│   │   └── ai_service.py      # AI analysis
+│   └── tests/
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   │   ├── page.tsx       # Main screener
+│   │   │   └── portfolio/     # Portfolio page
+│   │   ├── components/
+│   │   │   ├── Logo.tsx
+│   │   │   ├── ScreenerForm.tsx
+│   │   │   ├── StockTable.tsx
+│   │   │   ├── StockAnalysisCard.tsx
+│   │   │   ├── PortfolioCard.tsx
+│   │   │   └── AlertsCard.tsx
+│   │   └── lib/
+│   │       └── api.ts         # API client
+│   └── tests/
+└── docs/
+    ├── 01-project-overview.md
+    └── checkpoints/
 ```
 
-## Directory Structure
+## Running Tests
 
-```
-jetflux-sdk/
-├── .claude/
-│   ├── agents/           # 9 enhanced agents
-│   ├── skills/           # 18 workflow skills
-│   │   └── 00-development-workflows/
-│   ├── guides/           # Specialized guides
-│   └── mcp-configs/      # MCP server configurations
-├── CLAUDE.md             # Master directives
-├── instructions.md       # Project setup template
-└── README.md
+```bash
+# Backend
+cd backend
+python -m pytest tests/ -v
+
+# Frontend
+cd frontend
+npm run test
 ```
 
-## Available Agents
+## Screenshots
 
-### Core Agents
-Planner, Architect, TDD Guide, Code Reviewer, Security Reviewer, Build Error Resolver, E2E Runner, Refactor Cleaner, Doc Updater
+### Stock Screener
+Filter conservative stocks by your criteria and get instant results with color-coded metrics.
 
-### Enhanced Agents
-| Agent | Purpose |
-|-------|---------|
-| ultrathink-analyst | Deep failure analysis |
-| requirements-analyst | Requirements breakdown |
-| framework-advisor | Tech stack decisions |
-| intermediate-reviewer | Progress validation |
-| todo-manager | Task management |
-| gh-manager | GitHub Projects integration |
-| deployment-specialist | Docker/K8s deployment |
-| react-specialist | React 19/Next.js 15 |
-| flutter-specialist | Flutter mobile |
+### Portfolio Tracker
+Track your holdings with real-time prices, gain/loss calculations, and performance metrics.
 
-## Documentation
+### Price Alerts
+Set price targets and get notified when stocks hit your levels.
 
-- [CLAUDE.md](CLAUDE.md) - Master directives and all commands
-- [instructions.md](instructions.md) - Project setup template
-- [.claude/skills/00-development-workflows/](.claude/skills/00-development-workflows/) - All 18 skill files
+## Development Status
+
+- [x] Phase 1: Project setup, basic UI, TDD infrastructure
+- [x] Phase 2: Real stock data, database, frontend integration
+- [x] Phase 3: AI analysis, portfolio tracking, price alerts
+- [ ] Phase 4: Historical charts, diversification analysis, exports
 
 ## License
 
