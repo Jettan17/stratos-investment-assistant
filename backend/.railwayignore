@@ -1,0 +1,39 @@
+# Virtual environment
+venv/
+.venv/
+ENV/
+env/
+
+# Cache
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Test files (optional - include if you want tests in CI)
+# tests/
+
+# Local database
+*.db
+*.sqlite3
+test.db
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Coverage
+coverage/
+htmlcov/
+.coverage

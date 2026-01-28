@@ -1,5 +1,6 @@
 """Main FastAPI application for Stratos Investment Assistant."""
 
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -31,9 +32,18 @@ app = FastAPI(
 )
 
 # CORS configuration for frontend
+# Allow Vercel frontend and localhost for development
+cors_origins = [
+    "http://localhost:3000",
+    "https://frontend-omega-one-98.vercel.app",
+]
+# Add custom frontend URL from environment if set
+if frontend_url := os.getenv("FRONTEND_URL"):
+    cors_origins.append(frontend_url)
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=cors_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

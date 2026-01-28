@@ -42,6 +42,9 @@ env/
 .next/
 out/
 
+# Vercel
+.vercel/
+
 # Testing
 coverage/
 htmlcov/
@@ -66,3 +69,5 @@ Thumbs.db
 # Misc
 *.bak
 *.tmp
+
+.vercel

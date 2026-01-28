@@ -10,14 +10,22 @@ A conservative long-term investment assistant that helps users identify stable s
 - **Price Alerts** - Set alerts for when stocks hit your target prices
 - **Conservative Focus** - Curated universe of 33 blue-chip dividend-paying stocks
 
+## Live Demo
+
+| Service | URL |
+|---------|-----|
+| **Frontend** | [stratos-investment-assistant.vercel.app](https://stratos-investment-assistant.vercel.app) |
+| **Backend API** | [stratos-backend-production-273d.up.railway.app](https://stratos-backend-production-273d.up.railway.app) |
+| **API Docs** | [stratos-backend-production-273d.up.railway.app/docs](https://stratos-backend-production-273d.up.railway.app/docs) |
+
 ## Tech Stack
 
-| Layer | Technology |
-|-------|------------|
-| Frontend | Next.js 15, React 19, TypeScript, Tailwind CSS |
-| Backend | FastAPI, Python 3.11, SQLAlchemy |
-| Database | SQLite (dev), PostgreSQL (prod) |
-| Data Source | yfinance (Yahoo Finance API) |
+| Layer | Technology | Hosting |
+|-------|------------|---------|
+| Frontend | Next.js 15, React 19, TypeScript, Tailwind CSS | Vercel |
+| Backend | FastAPI, Python 3.11, SQLAlchemy | Railway |
+| Database | SQLite (dev), PostgreSQL (prod) | - |
+| Data Source | yfinance (Yahoo Finance API) | - |
 
 ## Quick Start
 
