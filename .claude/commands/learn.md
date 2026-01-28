@@ -1,3 +1,10 @@
+---
+description: Extract reusable patterns with smart auto-detection
+ecc_base_version: "5230892"
+last_synced: "2026-01-26"
+customizations: "Major expansion - auto-detect mode, 3 detection types, structured output"
+---
+
 # /learn - Extract Reusable Patterns
 
 Analyze the current session and extract valuable learnings using smart auto-detection.

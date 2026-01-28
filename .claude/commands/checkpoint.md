@@ -1,3 +1,10 @@
+---
+description: Create or verify a checkpoint in your workflow
+ecc_base_version: "5230892"
+last_synced: "2026-01-26"
+customizations: "Agent escalation section added"
+---
+
 # Checkpoint Command
 
 Create or verify a checkpoint in your workflow.

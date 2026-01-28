@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "gcp": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-gcp"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GOOGLE_CLOUD_PROJECT": "${GOOGLE_CLOUD_PROJECT}"
+      },
+      "description": "GCP MCP Server for Cloud Storage, Cloud Functions, and Compute Engine"
+    }
+  },
+  "configuration": {
+    "services": {
+      "storage": {
+        "enabled": true,
+        "description": "Cloud Storage bucket and object management"
+      },
+      "functions": {
+        "enabled": true,
+        "description": "Cloud Functions deployment and invocation"
+      },
+      "compute": {
+        "enabled": true,
+        "description": "Compute Engine VM management"
+      },
+      "bigquery": {
+        "enabled": true,
+        "description": "BigQuery dataset and query operations"
+      }
+    }
+  },
+  "setup_instructions": [
+    "1. Install Google Cloud CLI: https://cloud.google.com/sdk/docs/install",
+    "2. Authenticate: gcloud auth application-default login",
+    "3. Set project: gcloud config set project YOUR_PROJECT_ID",
+    "4. Set GOOGLE_APPLICATION_CREDENTIALS to your service account key JSON path",
+    "5. Add this config to your project's .claude/settings.json under mcpServers"
+  ]
+}

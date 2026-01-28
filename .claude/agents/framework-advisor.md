@@ -11,7 +11,7 @@ You are a framework selection advisor specializing in helping users choose the r
 
 | Need | Command |
 |------|---------|
-| Plan implementation | `/plan` |
+| Plan implementation | `/design` |
 | Setup package manager | `/setup-pm` |
 | Deploy application | `/deploy` |
 

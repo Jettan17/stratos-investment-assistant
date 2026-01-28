@@ -1,14 +1,22 @@
+---
+description: Comprehensive security and quality review (local, PR, issue fix modes)
+ecc_base_version: "5230892"
+last_synced: "2026-01-27"
+customizations: "Absorbed refactor-clean functionality, auto dead code cleanup"
+---
+
 # Code Review
 
 Comprehensive security and quality review supporting multiple modes:
-- **Default**: Review uncommitted local changes
+- **Default**: Review uncommitted local changes + dead code cleanup
 - **PR Mode**: Review a GitHub pull request
 - **Issue Fix Mode**: Analyze and fix a GitHub issue
 
 ## Usage
 
 ```bash
-/code-review              # Review local uncommitted changes
+/code-review              # Review local changes + cleanup dead code
+/code-review --no-clean   # Review only (skip dead code cleanup)
 /code-review #123         # Review GitHub PR #123
 /code-review fix #42      # Analyze and fix GitHub issue #42
 /code-review https://github.com/owner/repo/pull/123  # Review PR by URL
@@ -56,6 +64,22 @@ Review uncommitted changes in the working directory.
    - Suggested fix
 
 4. Block commit if CRITICAL or HIGH issues found
+
+5. **Dead Code Cleanup** (unless `--no-clean` flag used):
+   - Run dead code analysis tools:
+     - knip: Find unused exports and files
+     - depcheck: Find unused dependencies
+     - ts-prune: Find unused TypeScript exports
+   - Categorize findings by severity:
+     - SAFE: Test files, unused utilities (auto-remove)
+     - CAUTION: API routes, components (report for user decision)
+     - DANGER: Config files, main entry points (never touch)
+   - Before each deletion:
+     - Run full test suite
+     - Verify tests pass
+     - Apply change
+     - Re-run tests
+     - Rollback if tests fail
 
 Never approve code with security vulnerabilities!
 
@@ -125,7 +149,7 @@ When run with fix keyword: `/code-review fix #42`
    - Identify affected files from context
    - Determine scope (bug fix, feature, refactor)
 
-3. **Plan Fix** (Internal /plan invocation)
+3. **Plan Fix** (Internal /design invocation)
    - Design implementation approach
    - Identify test requirements
    - Estimate change scope
@@ -163,9 +187,11 @@ This command automatically escalates to specialized agents when:
 | Security-critical code | **security-auditor** | Deep vulnerability analysis, OWASP Top 10 |
 | PR from GitHub | **gh-manager** | GitHub API integration, PR management |
 | Issue resolution (fix mode) | **requirements-analyst** | Issue analysis, requirement extraction |
+| Large-scale refactoring | **architect** | Architectural impact analysis |
 
 ### Escalation Triggers
 - **gold-standards-validator**: Use for SDK compliance, import patterns, node development standards
 - **security-auditor**: Use for auth, payments, PII handling, or external API integrations
 - **gh-manager**: Use for GitHub PR/issue operations requiring API access
 - **requirements-analyst**: Use for complex issue analysis requiring requirement breakdown
+- **architect**: Use for significant structural changes during dead code cleanup

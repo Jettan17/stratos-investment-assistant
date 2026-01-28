@@ -1,0 +1,50 @@
+{
+  "mcpServers": {
+    "jira": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-jira"],
+      "env": {
+        "JIRA_URL": "${JIRA_URL}",
+        "JIRA_EMAIL": "${JIRA_EMAIL}",
+        "JIRA_API_TOKEN": "${JIRA_API_TOKEN}"
+      },
+      "description": "Jira MCP Server for issue tracking and sprint management"
+    }
+  },
+  "configuration": {
+    "features": {
+      "issues": {
+        "enabled": true,
+        "description": "Create, update, and manage Jira issues"
+      },
+      "sprints": {
+        "enabled": true,
+        "description": "Sprint planning and management"
+      },
+      "boards": {
+        "enabled": true,
+        "description": "Kanban/Scrum board operations"
+      },
+      "jql": {
+        "enabled": true,
+        "description": "JQL query support for advanced searches"
+      }
+    }
+  },
+  "setup_instructions": [
+    "1. Go to Atlassian Account Settings > Security > API tokens",
+    "2. Create a new API token",
+    "3. Set environment variables:",
+    "   - JIRA_URL: Your Jira instance URL (e.g., https://yourcompany.atlassian.net)",
+    "   - JIRA_EMAIL: Your Atlassian account email",
+    "   - JIRA_API_TOKEN: The API token you created",
+    "4. Add this config to your project's .claude/settings.json under mcpServers"
+  ],
+  "common_operations": [
+    "Create issue: Creates a new issue in specified project",
+    "Search issues: JQL-based issue search",
+    "Update issue: Modify issue fields and transitions",
+    "Create sprint: Create new sprints in Scrum boards",
+    "Move to sprint: Assign issues to sprints"
+  ]
+}

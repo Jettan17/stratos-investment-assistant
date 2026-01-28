@@ -1,35 +1,68 @@
-# Verification Command
+---
+description: Run comprehensive verification on current codebase
+ecc_base_version: "5230892"
+last_synced: "2026-01-27"
+customizations: "Enhanced flags documentation"
+---
+
+# /verify - Verification Command
 
 Run comprehensive verification on current codebase state.
 
-## Instructions
+## Usage
 
-Execute verification in this exact order:
+```bash
+/verify                 # Full verification (default)
+/verify quick           # Build + types only
+/verify pre-commit      # Checks for commits
+/verify pre-pr          # Full + security scan
+/verify --e2e           # Include E2E tests
+/verify --full          # All checks including E2E
+```
 
-1. **Build Check**
-   - Run the build command for this project
-   - If it fails, report errors and STOP
+## Verification Steps
 
-2. **Type Check**
-   - Run TypeScript/type checker
-   - Report all errors with file:line
+Execute in this exact order:
 
-3. **Lint Check**
-   - Run linter
-   - Report warnings and errors
+### 1. Build Check
+- Run the build command for this project
+- If it fails, report errors and STOP
 
-4. **Test Suite**
-   - Run all tests
-   - Report pass/fail count
-   - Report coverage percentage
+### 2. Type Check
+- Run TypeScript/type checker
+- Report all errors with file:line
 
-5. **Console.log Audit**
-   - Search for console.log in source files
-   - Report locations
+### 3. Lint Check
+- Run linter
+- Report warnings and errors
 
-6. **Git Status**
-   - Show uncommitted changes
-   - Show files modified since last commit
+### 4. Test Suite
+- Run all tests
+- Report pass/fail count
+- Report coverage percentage
+
+### 5. Console.log Audit
+- Search for console.log in source files
+- Report locations
+
+### 6. Git Status
+- Show uncommitted changes
+- Show files modified since last commit
+
+---
+
+## Arguments
+
+| Argument | What It Does |
+|----------|--------------|
+| *(none)* | Full verification (build + types + lint + tests) |
+| `quick` | Build + types only (fast) |
+| `pre-commit` | Checks relevant for commits |
+| `pre-pr` | Full + security scan |
+| `--e2e` | Include E2E tests in verification |
+| `--full` | All checks including E2E and coverage analysis |
+
+---
 
 ## Output
 
@@ -50,24 +83,37 @@ Ready for PR: [YES/NO]
 
 If any critical issues, list them with fix suggestions.
 
-## Arguments
+---
 
-$ARGUMENTS can be:
-- `quick` - Only build + types
-- `full` - All checks (default)
-- `pre-commit` - Checks relevant for commits
-- `pre-pr` - Full checks plus security scan
+## Examples
+
+```bash
+# Quick check before committing
+/verify quick
+
+# Full check before PR
+/verify pre-pr
+
+# Include E2E tests
+/verify --e2e
+
+# Everything including E2E and coverage
+/verify --full
+```
+
+---
 
 ## Agent Escalation
-
-This command automatically escalates to specialized agents when:
 
 | Condition | Agent | Purpose |
 |-----------|-------|---------|
 | Standards compliance | **gold-standards-validator** | Pattern compliance, coding standards |
-| Real infrastructure testing | **testing-specialist** | NO MOCKING policy enforcement |
 | Security scan | **security-auditor** | Vulnerability analysis |
 
-### Escalation Triggers
-- **gold-standards-validator**: Use for SDK compliance validation, pattern enforcement
-- **security-auditor**: Use for pre-PR security scans, auth/payment code
+---
+
+## Related Commands
+
+- `/tdd` - Run tests with TDD workflow
+- `/build-fix` - Fix build errors
+- `/code-review` - Quality review before PR

@@ -1,0 +1,45 @@
+{
+  "mcpServers": {
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-linear"],
+      "env": {
+        "LINEAR_API_KEY": "${LINEAR_API_KEY}"
+      },
+      "description": "Linear MCP Server for issue tracking and project management"
+    }
+  },
+  "configuration": {
+    "features": {
+      "issues": {
+        "enabled": true,
+        "description": "Create, update, and manage issues"
+      },
+      "projects": {
+        "enabled": true,
+        "description": "Project and cycle management"
+      },
+      "teams": {
+        "enabled": true,
+        "description": "Team and workflow management"
+      },
+      "comments": {
+        "enabled": true,
+        "description": "Issue comments and discussions"
+      }
+    }
+  },
+  "setup_instructions": [
+    "1. Go to Linear Settings > API > Personal API Keys",
+    "2. Create a new API key with appropriate permissions",
+    "3. Set LINEAR_API_KEY environment variable",
+    "4. Add this config to your project's .claude/settings.json under mcpServers"
+  ],
+  "common_operations": [
+    "Create issue: Creates a new issue in specified team/project",
+    "List issues: Query issues with filters (status, assignee, priority)",
+    "Update issue: Modify issue properties (status, priority, labels)",
+    "Add comment: Add comments to existing issues",
+    "Create cycle: Create sprints/cycles for project planning"
+  ]
+}

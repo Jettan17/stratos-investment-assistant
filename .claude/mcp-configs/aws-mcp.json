@@ -1,0 +1,40 @@
+{
+  "mcpServers": {
+    "aws": {
+      "command": "npx",
+      "args": ["-y", "@aws/mcp-server-aws"],
+      "env": {
+        "AWS_ACCESS_KEY_ID": "${AWS_ACCESS_KEY_ID}",
+        "AWS_SECRET_ACCESS_KEY": "${AWS_SECRET_ACCESS_KEY}",
+        "AWS_REGION": "${AWS_REGION:-us-east-1}"
+      },
+      "description": "AWS MCP Server for S3, Lambda, EC2, and other AWS service management"
+    }
+  },
+  "configuration": {
+    "services": {
+      "s3": {
+        "enabled": true,
+        "description": "S3 bucket management and file operations"
+      },
+      "lambda": {
+        "enabled": true,
+        "description": "Lambda function management and invocation"
+      },
+      "ec2": {
+        "enabled": true,
+        "description": "EC2 instance management"
+      },
+      "cloudwatch": {
+        "enabled": true,
+        "description": "CloudWatch logs and metrics"
+      }
+    }
+  },
+  "setup_instructions": [
+    "1. Install AWS CLI and configure credentials: aws configure",
+    "2. Set environment variables: AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, AWS_REGION",
+    "3. Or use AWS profiles: AWS_PROFILE=your-profile",
+    "4. Add this config to your project's .claude/settings.json under mcpServers"
+  ]
+}

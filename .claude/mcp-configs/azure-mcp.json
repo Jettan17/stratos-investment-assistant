@@ -1,0 +1,42 @@
+{
+  "mcpServers": {
+    "azure": {
+      "command": "npx",
+      "args": ["-y", "@anthropic/mcp-server-azure"],
+      "env": {
+        "AZURE_SUBSCRIPTION_ID": "${AZURE_SUBSCRIPTION_ID}",
+        "AZURE_TENANT_ID": "${AZURE_TENANT_ID}",
+        "AZURE_CLIENT_ID": "${AZURE_CLIENT_ID}",
+        "AZURE_CLIENT_SECRET": "${AZURE_CLIENT_SECRET}"
+      },
+      "description": "Azure MCP Server for Blob Storage, Azure Functions, and VM management"
+    }
+  },
+  "configuration": {
+    "services": {
+      "blob_storage": {
+        "enabled": true,
+        "description": "Azure Blob Storage container and blob management"
+      },
+      "functions": {
+        "enabled": true,
+        "description": "Azure Functions deployment and management"
+      },
+      "vms": {
+        "enabled": true,
+        "description": "Virtual Machine management"
+      },
+      "cosmos_db": {
+        "enabled": true,
+        "description": "CosmosDB database operations"
+      }
+    }
+  },
+  "setup_instructions": [
+    "1. Install Azure CLI: https://docs.microsoft.com/en-us/cli/azure/install-azure-cli",
+    "2. Login: az login",
+    "3. Create a service principal: az ad sp create-for-rbac --name 'claude-code-sp' --role contributor",
+    "4. Set environment variables from the service principal output",
+    "5. Add this config to your project's .claude/settings.json under mcpServers"
+  ]
+}

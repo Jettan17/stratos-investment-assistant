@@ -1,6 +1,9 @@
 ---
 description: Configure your preferred package manager (npm/pnpm/yarn/bun)
 disable-model-invocation: true
+ecc_base_version: "5230892"
+last_synced: "2026-01-26"
+customizations: "none (identical to base)"
 ---
 
 # Package Manager Setup

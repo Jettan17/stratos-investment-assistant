@@ -1,5 +1,7 @@
 ---
 description: Create new Claude Code custom commands interactively.
+origin: "jetflux-original"
+created: "2026-01-26"
 ---
 
 # Create Command

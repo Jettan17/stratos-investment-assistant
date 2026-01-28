@@ -1,3 +1,10 @@
+---
+description: Incrementally fix TypeScript and build errors
+ecc_base_version: "5230892"
+last_synced: "2026-01-26"
+customizations: "Agent escalation section added"
+---
+
 # Build and Fix
 
 Incrementally fix TypeScript and build errors:
