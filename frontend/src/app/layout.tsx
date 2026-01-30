@@ -8,6 +8,10 @@ export const metadata: Metadata = {
   title: "Stratos Investment Assistant",
   description:
     "Conservative long-term investment assistant for finding stable stocks with 10+ year horizon",
+  icons: {
+    icon: "/logo-icon.svg",
+    apple: "/logo-icon.svg",
+  },
 };
 
 export default function RootLayout({
